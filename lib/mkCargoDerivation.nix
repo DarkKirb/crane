@@ -57,7 +57,7 @@ chosenStdenv.mkDerivation (cleanedArgs // {
     inheritCargoArtifactsHook
     installCargoArtifactsHook
     zstd
-  ];
+  ]; 
 
   buildPhase = args.buildPhase or ''
     runHook preBuild

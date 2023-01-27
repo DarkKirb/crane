@@ -17,6 +17,12 @@ configureCargoCommonVars() {
   # Used by `cargoWithProfile` to specify a cargo profile to use.
   # Not exported since it is not natively understood by cargo.
   CARGO_PROFILE=${CARGO_PROFILE-release}
+
+  # On aarch64 we have to disable outline atomics
+  if [ "$(uname -m)" = "aarch64" ]; then
+    export RUSTFLAGS="${RUSTFLAGS} -lgcc"
+    export CARGO_BUILD_RUSTFLAGS="${CARGO_BUILD_RUSTFLAGS} -lgcc"
+  fi
 }
 
 # NB: run after patching, but before other configure hooks so that we can set
